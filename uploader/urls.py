@@ -1,9 +1,9 @@
 from django.contrib import admin
+from django.urls import path, include
 from . import views
-from django.urls import re_path
 
 urlpatterns = [
-    re_path(r'^admin/', admin.site.urls),
-    re_path(r'^$', views.uploader, name='upload'),
-    re_path(r'^(?P<link>.*)$', views.downloader, name='download'),
+    path('admin/', admin.site.urls),
+    path('', views.uploader, name='upload'),
+    path('<str:link>/', views.downloader, name='download'),
 ]
