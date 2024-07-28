@@ -3,22 +3,23 @@ from django.views import View
 from .forms import UploadFileForm
 from .models import File
 from django.contrib import messages
-from django.http import JsonResponse , HttpResponseRedirect
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
-
-class uploader(View) :
-    def get(self, request) :
-        return render(request, "uploader/pages/upload.html", context={'form': UploadFileForm()})
-    
-    def post(self, request) :
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+def uploader(request):
+    if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            instance = File(fileField=request.FILES["file"])
-            instance.save()
-            return redirect(instance)
-        messages.error(request, 'Error uploading file.')
-        return render(request, 'uploader/pages/upload.html', {'form': form})
+            got = File(fileField=form.cleaned_data['file'])
+            got.save
+            return redirect('download',link='link')
+    else:
+        form = UploadFileForm()
+    return render(request, 'uploader/pages/upload.html', {'form': form})
 
-def downloader(request, link) :
-    return render(request, 'uploader/pages/download.html', {'uploaded_file_url': link})
+def downloader(request,link) :
+    direct_link = 'https://example.com/direct-link'
+    forum_link = 'https://example.com/forum-link'
+    return render(request, 'uploader/pages/download.html', {
+        'direct_link': direct_link,
+        'forum_link': forum_link,
+    })

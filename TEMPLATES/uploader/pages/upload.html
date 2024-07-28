@@ -66,120 +66,63 @@
 {%endblock content%}
 {%block extrajs%}
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const fileInput = document.getElementById('file-input');
-        const uploadButton = document.getElementById('upload-button');
-        const uploadStatus = document.getElementById('upload-status');
-        const form = document.getElementById('file-upload-form');
-
-        uploadButton.addEventListener('click', (e) => {
-            e.preventDefault();
-
-            if (form.checkValidity()) {
-                const file = fileInput.files[0];
-
-                const formData = new FormData();
-                formData.append('file', file);
-
-                const csrfToken = getCookie('csrftoken');
-
-                fetch('/', {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRFToken': csrfToken
-                    },
-                    body: formData
-                })
-                .then((response) => {
-                    if (response.ok) {
-                        uploadStatus.innerHTML = 'File uploaded successfully!';
-                    } else {
-                        uploadStatus.innerHTML = 'Error uploading file.';
-                    }
-                })
-                .catch((error) => {
-                    uploadStatus.innerHTML = 'Error uploading file.';
-                });
-            } else {
-                uploadStatus.innerHTML = 'Please fill in the required fields.';
-            }
-        });
-
-        // Function to get a cookie by name
-        function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                const cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    const cookie = cookies[i].trim();
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
-        }
-    });
-</script>
-<!-- <script>
 	document.addEventListener('DOMContentLoaded', function() {
-			const fileInput = document.getElementById('file-input');
-			const uploadButton = document.getElementById('upload-button');
-			const uploadStatus = document.getElementById('upload-status');
-			const form = document.getElementById('file-upload-form');
+		const fileInput = document.getElementById('file-input');
+		const uploadButton = document.getElementById('upload-button');
+		const uploadStatus = document.getElementById('upload-status');
+		const form = document.getElementById('file-upload-form');
 
-			uploadButton.addEventListener('click', (e) => {
-					e.preventDefault();
+		uploadButton.addEventListener('click', (e) => {
+			e.preventDefault();
 
-					if (form.checkValidity()) {
-							const file = fileInput.files[0];
+			if (form.checkValidity()) {
+				const file = fileInput.files[0];
 
-							const formData = new FormData();
-							formData.append('file', file);
+				const formData = new FormData();
+				formData.append('file', file);
 
-							const xhr = new XMLHttpRequest();
-							xhr.open('POST', '/', true);
+				const csrfToken = getCookie('csrftoken');
 
-							// Get the CSRF token from the cookie
-							const csrfToken = getCookie('csrftoken');
-
-							// Add the CSRF token to the request headers
-							xhr.setRequestHeader('X-CSRFToken', csrfToken);
-
-							xhr.upload.addEventListener('progress', (e) => {
-									const percent = (e.loaded / e.total) * 100;
-									uploadStatus.innerHTML = `Uploading... ${percent.toFixed(2)}%`;
-							});
-							xhr.addEventListener('load', () => {
-									if (xhr.status === 200) {
-										uploadStatus.innerHTML = 'File uploaded successfully!';
-									} else {
-											uploadStatus.innerHTML = 'Error uploading file.';
-									}
-							});
-
-							xhr.send(formData);
+				fetch('/', {
+					method: 'POST',
+					redirect: 'follow',
+					headers: {
+						'X-CSRFToken': csrfToken
+					},
+					body: formData
+				})
+				.then((response) => {
+					if (response.ok) {
+						uploadStatus.innerHTML = 'File uploaded successfully!';
+						window.location.replace(response.url)
 					} else {
-							uploadStatus.innerHTML = 'Please fill in the required fields.';
+						uploadStatus.innerHTML = 'Error uploading file.';
 					}
-			});
-
-			// Function to get a cookie by name
-			function getCookie(name) {
-					let cookieValue = null;
-					if (document.cookie && document.cookie !== '') {
-							const cookies = document.cookie.split(';');
-							for (let i = 0; i < cookies.length; i++) {
-									const cookie = cookies[i].trim();
-									if (cookie.substring(0, name.length + 1) === (name + '=')) {
-											cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-											break;
-									}
-							}
-					}
-					return cookieValue;
+				})
+				.catch((error) => {
+					uploadStatus.innerHTML = 'Error uploading file.';
+					console.log(error)
+				});
+			} else {
+				uploadStatus.innerHTML = 'Please fill in the required fields.';
 			}
+		});
+
+		// Function to get a cookie by name
+		function getCookie(name) {
+			let cookieValue = null;
+			if (document.cookie && document.cookie !== '') {
+				const cookies = document.cookie.split(';');
+				for (let i = 0; i < cookies.length; i++) {
+					const cookie = cookies[i].trim();
+					if (cookie.substring(0, name.length + 1) === (name + '=')) {
+						cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+						break;
+					}
+				}
+			}
+			return cookieValue;
+		}
 	});
-</script> -->
+</script>
 {%endblock extrajs%}

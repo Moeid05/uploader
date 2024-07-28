@@ -1,1 +1,52 @@
-<!-- <p>Uploaded file: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p> -->
+{% extends 'uploader/layouts/base.html' %}
+{% block extrastyle %}
+<style>
+    #download-box {
+  width: 50%;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#download-box h2 {
+  margin-top: 0;
+  font-weight: bold;
+  color: #333;
+}
+
+#download-box p {
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #666;
+}
+
+#download-box a {
+  text-decoration: none;
+  color: #337ab7;
+}
+
+#download-box a:hover {
+  color: #23527c;
+}
+</style>
+{% endblock extrastyle %}
+{% block content %}
+<div id="download-box">
+    <h2>Download Links</h2>
+    <p>
+        Direct Link: <a href="{{ direct_link }}" onclick="copyLink('{{ direct_link }}')"> {{ direct_link }} </a>
+        <br>
+        Forum Link: <a href="{{ forum_link }}" onclick="copyLink('{{ forum_link }}')"> {{ forum_link }} </a>
+    </p>
+</div>
+
+<script>
+    function copyLink(link) {
+        navigator.clipboard.writeText(link);
+        alert('Link copied to clipboard!');
+    }
+</script>
+{% endblock content %}
