@@ -77,12 +77,14 @@
 
 			if (form.checkValidity()) {
 				const file = fileInput.files[0];
+				const expirationDate = document.querySelector('#file-upload-form #expiration-date').value;
 
 				const formData = new FormData();
 				formData.append('file', file);
+				formData.append('expiration_date', expirationDate);
 
 				const csrfToken = getCookie('csrftoken');
-
+				console.log(formData)
 				fetch('/', {
 					method: 'POST',
 					redirect: 'follow',

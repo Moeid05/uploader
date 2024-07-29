@@ -28,8 +28,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'uploader'
+    'uploader',
+    'celery',
+    'django_celery_beat',
+    'django_celery_results',
 ]
+CELERY_BEAT_SCHEDULER = 'django-celery-beat.schedulers.DatabaseScheduler'
+CELERY_BEAT_SCHEDULE = {
+    'delete-expired-files': {
+        'task': 'uploader.management.commands.delete_expired_files',
+        'schedule': '0 0 * * *',
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

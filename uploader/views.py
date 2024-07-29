@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
+from django.http import FileResponse
 from .forms import UploadFileForm
 from .models import File
 import uuid
-from django.http import FileResponse
+
 def generate_link(file_name):
     return f"{file_name}-{uuid.uuid4()}"
 def uploader_page(request):
     if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
+        form = UploadFileForm(request.POST, request.FILES ,)
         if form.is_valid():
             loaded = form.cleaned_data['file']
             file_name = loaded.name
