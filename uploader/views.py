@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from .forms import UploadFileForm
 from .models import File
 import uuid
+from django.http import FileResponse
 def generate_link(file_name):
     return f"{file_name}-{uuid.uuid4()}"
 def uploader_page(request):
@@ -27,11 +27,8 @@ def downloader_page(request,link) :
         'forum_link': forum_link,
     })
 
-def download(request,link) :
+def download(request, link):
     file_obj = File.objects.get(link=link)
     file_path = file_obj.fileField.path
     file_name = file_obj.fileField.name
-    with open(file_path, 'rb') as f:
-        response = HttpResponse(f.read(), content_type='application/octet-stream')
-        response['Content-Disposition'] = f'attachment; filename="{file_name}"'
-        return response
+    return FileResponse(open(file_path, 'rb'), as_attachment=True, filename=file_name)
