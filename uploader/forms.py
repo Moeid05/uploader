@@ -3,9 +3,20 @@ from django.core.validators import FileExtensionValidator
 
 
 class UploadFileForm(forms.Form):
+    file_name = forms.CharField(
+        label='enter a name for file',
+        max_length=12,
+        required=False,
+        widget=forms.TextInput(attrs={'id': 'file-name'})
+    )
     file = forms.FileField(
         label='Select a file',
-        widget=forms.FileInput(attrs={'id': 'file-input'})
+        widget=forms.FileInput(attrs={'id': 'file-input'}),
+        validators=[FileExtensionValidator(allowed_extensions=[
+            'pdf', 'docx', 'txt',
+            'jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff', 'ico',
+            'webp', 'svg', 'psd', 'ai', 'cdr', 'eps'
+        ])]
     )
     expiration_date = forms.ChoiceField(
         label='Expiration Date',

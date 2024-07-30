@@ -2,62 +2,69 @@
 {%block extrastyle %}
 <style>
 	#file-upload-form {
-			max-width: 400px;
-			margin: 40px auto;
-			padding: 20px;
-			border: 1px solid #ccc;
-			border-radius: 10px;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-			display: flex;
-			flex-direction: column;
-			align-items: center;
+		max-width: 400px;
+		margin: 40px auto;
+		padding: 20px;
+		border: 1px solid #ccc;
+		border-radius: 10px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
-	/* Style the file input field */
 	#file-input {
-			padding: 10px;
-			border: 1px solid #ccc;
-			border-radius: 5px;
-			margin-bottom: 20px;
+		padding: 10px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		margin-bottom: 20px;
 	}
 
-	/* Style the upload button */
+	#file-name {
+		padding: 10px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		margin-bottom: 20px;
+	}
+
+	#expiration-date {
+		padding: 10px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		margin-bottom: 20px;
+	}
+
 	#upload-button {
-			background-color: #4CAF50;
-			color: #fff;
-			padding: 10px 20px;
-			border: none;
-			border-radius: 5px;
-			cursor: pointer;
-			margin-bottom: 20px;
+		background-color: #4CAF50;
+		color: #fff;
+		padding: 10px 20px;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		margin-bottom: 20px;
 	}
 
-	/* Style the upload status message */
 	#upload-status {
-			margin-top: 20px;
-			font-size: 18px;
-			color: #666;
-			font-weight: bold;
+		margin-top: 20px;
+		font-size: 18px;
+		color: #666;
+		font-weight: bold;
 	}
 
-	/* Style the upload progress message */
 	#upload-status.uploading {
-			color: #337ab7;
+		color: #337ab7;
 	}
 
-	/* Style the upload success message */
 	#upload-status.success {
-			color: #2ecc71;
+		color: #2ecc71;
 	}
 
-	/* Style the upload error message */
 	#upload-status.error {
-			color: #e74c3c;
+		color: #e74c3c;
 	}
 </style>
 {%endblock extrastyle %}
 {%block content%}
-	<h1>File Uploader</h1>
 	<form id="file-upload-form" method="post" enctype="multipart/form-data">
 		{{ form.as_p }}
 		<button id="upload-button">Upload File</button>
@@ -76,10 +83,12 @@
 			e.preventDefault();
 
 			if (form.checkValidity()) {
+				const fileName = document.querySelector('#file-upload-form #file-name').value;
 				const file = fileInput.files[0];
 				const expirationDate = document.querySelector('#file-upload-form #expiration-date').value;
 
 				const formData = new FormData();
+				formData.append('file_name',fileName)
 				formData.append('file', file);
 				formData.append('expiration_date', expirationDate);
 

@@ -6,15 +6,16 @@ import uuid
 
 def generate_link(file_name):
     return f"{file_name}-{uuid.uuid4()}"
+
 def uploader_page(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES ,)
         if form.is_valid():
             loaded = form.cleaned_data['file']
-            file_name = loaded.name
+            file_name = form.cleaned_data['file_name']
             link = generate_link(file_name)
-            ins = File(fileField=loaded,link=link)
-            ins.save()
+            instance = File(fileName=file_name,fileField=loaded,link=link)
+            instance.save()
             return redirect('download',link=link)
     else:
         form = UploadFileForm()
