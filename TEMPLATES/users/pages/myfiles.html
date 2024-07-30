@@ -1,0 +1,15 @@
+{% extends 'users/layouts/base.html' %}
+
+{% block content %}
+  <h1>My Files</h1>
+  <ul>
+    {% for file in myfiles.all %}
+      <li>
+        {{ file.fileName }} ({{ file.fileField.size }} bytes)
+        <a href="{{ file.fileField.url }}">Download</a>
+      </li>
+    {% empty %}
+      <li>No files uploaded yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

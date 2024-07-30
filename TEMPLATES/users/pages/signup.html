@@ -1,0 +1,43 @@
+{%extends 'users\layouts\base.html'%}
+{%block extrastyle%}
+<style>
+body {
+  background-color: #f2f2f2;
+}
+
+h1 {
+  color: #00698f;
+}
+
+form {
+  width: 50%;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+button[type="submit"] {
+  background-color: #00698f;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #003d5d;
+}
+</style>
+{%endblock extrastyle%}
+{%block content%}
+<h1>Sign Up</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Sign Up</button>
+</form>
+{%endblock content%}

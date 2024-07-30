@@ -16,6 +16,8 @@ def uploader_page(request):
             link = generate_link(file_name)
             instance = File(fileName=file_name,fileField=loaded,link=link)
             instance.save()
+            if request.user.is_authenticated :
+                request.user.myFiles.add(instance)
             return redirect('download',link=link)
     else:
         form = UploadFileForm()
