@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'uploader',
+    'users',
     'celery',
     'django_celery_beat',
     'django_celery_results',
@@ -125,3 +126,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = BASE_DIR / 'FileStorage'
+
+AUTH_USER_MODEL = "users.CustomUser"
