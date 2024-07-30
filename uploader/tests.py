@@ -3,13 +3,16 @@ from django.test import TestCase
 from django.core.management import call_command
 from uploader.models import File
 from datetime import datetime, timedelta
-
+import os
 class DeleteExpiredFilesTest(TestCase):
     def setUp(self):
         # Create some test files
         self.file1 = File.objects.create(fileField='test1.txt', Expiration_date=datetime.now() + timedelta(days=1))
+        self.file1Path1 = self.file1.fileField.path
         self.file2 = File.objects.create(fileField='test2.txt', Expiration_date=datetime.now() - timedelta(days=1))
+        self.file1Path2 = self.file2.fileField.path
         self.file3 = File.objects.create(fileField='test3.txt', Expiration_date=datetime.now() + timedelta(days=30))
+        self.file1Path3 = self.file3.fileField.path
 
     def test_delete_expired_files(self):
         # Call the command
@@ -21,7 +24,10 @@ class DeleteExpiredFilesTest(TestCase):
         # Check that the non-expired files were not deleted
         self.assertTrue(File.objects.filter(id=self.file1.id).exists())
         self.assertTrue(File.objects.filter(id=self.file3.id).exists())
-
+    def test_delete_expired_files_files(self) :
+        self.assertFalse(os.path.isfile(self.file1Path1))
+        self.assertFalse(os.path.isfile(self.file1Path2))
+        self.assertFalse(os.path.isfile(self.file1Path3))
     def test_delete_expired_files_multiple_expired(self):
         # Create another expired file
         self.file4 = File.objects.create(fileField='test4.txt', Expiration_date=datetime.now() - timedelta(days=1))
