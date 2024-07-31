@@ -40,6 +40,12 @@
 {% endblock extrastyle %}
 
 {% block content %}
+	<div class="auth-btns">
+		<button class="auth-btn" id="login-btn">Login</button>
+		<button class="auth-btn" id="profile-btn">
+			<i class="fas fa-user-circle"></i> My Files ({{ request.user.username }})
+		  </button>
+	</div>
 <div id="download-box">
     <h2>Download Links</h2>
     <p>
@@ -59,3 +65,15 @@
     }
 </script>
 {% endblock content %}
+{%block extrajs%}
+<script>
+    const loginBtn = document.getElementById('login-btn');
+    const profileBtn = document.getElementById('profile-btn');
+  		loginBtn.addEventListener('click', () => {
+			window.location.href = '/accounts/login';
+		});
+
+		profileBtn.addEventListener('click', () => {
+			window.location.href = '/accounts/myfiles';})
+</script>
+{%endblock extrajs%}

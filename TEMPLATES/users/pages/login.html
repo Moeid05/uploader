@@ -1,5 +1,5 @@
-{%extends 'users\layouts\base.html'%}
-{%block extrastyle%}
+{% extends 'users\layouts\base.html' %}
+{% block extrastyle %}
 <style>
 body {
   background-color: #f2f2f2;
@@ -31,13 +31,30 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #003d5d;
 }
+
+.no-account {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.no-account a {
+  color: #00698f;
+  text-decoration: none;
+}
+
+.no-account a:hover {
+  text-decoration: underline;
+}
 </style>
-{%endblock extrastyle%}
-{%block content%}
+{% endblock extrastyle %}
+{% block content %}
 <h1>Login</h1>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Login</button>
 </form>
-{%endblock content%}
+<div class="no-account">
+  Don't have an account? <a href="{% url 'signup' %}">Sign up</a>
+</div>
+{% endblock content %}

@@ -1,5 +1,27 @@
 {% extends 'users/layouts/base.html' %}
-
+{% block extrastyle %}
+  <style>
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    li {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    li:last-child {
+      border-bottom: none;
+    }
+    a {
+      text-decoration: none;
+      color: #337ab7;
+    }
+    a:hover {
+      color: #23527c;
+    }
+  </style>
+{% endblock extrastyle %}
 {% block content %}
   <h1>My Files</h1>
   <ul>

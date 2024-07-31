@@ -1,75 +1,99 @@
 {%extends 'uploader/layouts/base.html' %}
 {%block extrastyle %}
 <style>
-	#file-upload-form {
-		max-width: 400px;
-		margin: 40px auto;
-		padding: 20px;
-		border: 1px solid #ccc;
-		border-radius: 10px;
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
+#file-upload-form {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-	#file-input {
-		padding: 10px;
-		border: 1px solid #ccc;
-		border-radius: 5px;
-		margin-bottom: 20px;
-	}
+#file-input,
+#file-name,
+#expiration-date {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  width: 100%;
+}
 
-	#file-name {
-		padding: 10px;
-		border: 1px solid #ccc;
-		border-radius: 5px;
-		margin-bottom: 20px;
-	}
+#upload-button {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
 
-	#expiration-date {
-		padding: 10px;
-		border: 1px solid #ccc;
-		border-radius: 5px;
-		margin-bottom: 20px;
-	}
+#upload-status {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #666;
+  font-weight: bold;
+}
 
-	#upload-button {
-		background-color: #4CAF50;
-		color: #fff;
-		padding: 10px 20px;
-		border: none;
-		border-radius: 5px;
-		cursor: pointer;
-		margin-bottom: 20px;
-	}
+#upload-status.uploading {
+  color: #337ab7;
+}
 
-	#upload-status {
-		margin-top: 20px;
-		font-size: 18px;
-		color: #666;
-		font-weight: bold;
-	}
+#upload-status.success {
+  color: #2ecc71;
+}
 
-	#upload-status.uploading {
-		color: #337ab7;
-	}
+#upload-status.error {
+  color: #e74c3c;
+}
 
-	#upload-status.success {
-		color: #2ecc71;
-	}
+.auth-btns {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
 
-	#upload-status.error {
-		color: #e74c3c;
-	}
+.auth-btn,
+#profile-btn {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 10px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.auth-btn:hover,
+#profile-btn:hover {
+  background-color: #3e8e41;
+}
+
+#profile-btn i {
+  margin-right: 10px;
+}
 </style>
 {%endblock extrastyle %}
 {%block content%}
+	<div class="auth-btns">
+		<button class="auth-btn" id="login-btn">Login</button>
+		<button class="auth-btn" id="profile-btn">
+			<i class="fas fa-user-circle"></i> My Files ({{ request.user.username }})
+		  </button>
+	</div>
 	<form id="file-upload-form" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
 		{{ form.as_p }}
 		<button id="upload-button">Upload File</button>
 		<div id="upload-status"></div>
 	</form>
+
 {%endblock content%}
 {%block extrajs%}
 <script>
@@ -78,7 +102,9 @@
 		const uploadButton = document.getElementById('upload-button');
 		const uploadStatus = document.getElementById('upload-status');
 		const form = document.getElementById('file-upload-form');
-
+		const loginBtn = document.getElementById('login-btn');
+		const profileBtn = document.getElementById('profile-btn');
+		
 		uploadButton.addEventListener('click', (e) => {
 			e.preventDefault();
 
@@ -119,7 +145,13 @@
 			}
 		});
 
-		// Function to get a cookie by name
+		loginBtn.addEventListener('click', () => {
+			window.location.href = '/accounts/login';
+		});
+
+		profileBtn.addEventListener('click', () => {
+			window.location.href = '/accounts/myfiles';})
+		// Function to get a cookie by
 		function getCookie(name) {
 			let cookieValue = null;
 			if (document.cookie && document.cookie !== '') {
