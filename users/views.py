@@ -16,7 +16,8 @@ def signup(request):
             User = get_user_model()
             user = User.objects.get(username=username)
             login(request, user)
-            return redirect('uploader : uplaod')
+            return redirect('upload')
+
     else:
         form = SignUpForm()
     return render(request, 'users/pages/signup.html', {'form': form})
