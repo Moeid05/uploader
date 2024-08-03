@@ -1,0 +1,116 @@
+#main-content {
+    margin-left: 5%; /* adjust the value to your liking */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  #file-upload-form {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #file-input,
+  #file-name,
+  #expiration-date {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  #upload-button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  #upload-button:hover {
+    background-color: #3e8e41;
+  }
+  
+  #upload-status {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #666;
+    font-weight: bold;
+  }
+  
+  #upload-status.uploading {
+    color: #337ab7;
+  }
+  
+  #upload-status.success {
+    color: #2ecc71;
+  }
+  
+  #upload-status.error {
+    color: #e74c3c;
+  }
+  
+  .auth-btns {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .auth-btn,
+  #profile-btn {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .auth-btn:hover,
+  #profile-btn:hover {
+    background-color: #3e8e41;
+  }
+  
+  #profile-btn i {
+    margin-right: 10px;
+  }
+  
+  /* Responsive design */
+  
+  @media only screen and (max-width: 768px) {
+    #main-content {
+      margin-left: 0;
+    }
+    #file-upload-form {
+      max-width: 300px;
+    }
+  }
+  
+  @media only screen and (max-width: 480px) {
+    #file-upload-form {
+      max-width: 200px;
+    }
+    #file-input,
+    #file-name,
+    #expiration-date {
+      padding: 5px;
+    }
+    #upload-button {
+      padding: 5px 10px;
+    }
+  }

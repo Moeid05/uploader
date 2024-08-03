@@ -27,11 +27,8 @@ def uploader_page(request):
     return render(request, 'uploader/pages/upload.html', {'form': form})
 
 def downloader_page(request, link):
-    direct_link = link
-    forum_link = 'idk'
     return render(request, 'uploader/pages/download.html', {
-        'direct_link': direct_link,
-        'forum_link': forum_link,
+        'link' : link,
     })
 
 def download(request, link):

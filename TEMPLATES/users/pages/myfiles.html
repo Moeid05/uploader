@@ -1,37 +1,33 @@
 {% extends 'users/layouts/base.html' %}
+{%load static%}
 {% block extrastyle %}
-  <style>
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    li {
-      padding: 10px;
-      border-bottom: 1px solid #ccc;
-    }
-    li:last-child {
-      border-bottom: none;
-    }
-    a {
-      text-decoration: none;
-      color: #337ab7;
-    }
-    a:hover {
-      color: #23527c;
-    }
-  </style>
+<link rel="stylesheet" href="{%static 'users/css/myfiles.css'%}">
 {% endblock extrastyle %}
+
 {% block content %}
-  <h1>My Files</h1>
-  <ul>
-    {% for file in myfiles.all %}
-      <li>
-        {{ file.fileName }} ({{ file.fileField.size }} bytes)
-        <a href="{{ file.fileField.url }}">Download</a>
-      </li>
-    {% empty %}
-      <li>No files uploaded yet.</li>
-    {% endfor %}
-  </ul>
+
+  <div class="main-content">
+    <h1>My Files</h1>
+    <ul>
+      {% for file in myfiles.all %}
+        <li>
+          <a href="http://127.0.0.1:8000/download/{{ file.link }}">
+            {{ file.fileName }} ({{ file.fileField.size }} bytes)
+          </a>
+          <span class="download-link" onclick="copyLink('http://127.0.0.1:8000/download/{{ file.link }}')">Copy Link</span>
+        </li>
+      {% empty %}
+        <li>No files uploaded yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock %}
+
+{% block extrajs %}
+  <script>
+    function copyLink(link) {
+      navigator.clipboard.writeText(link);
+      alert('Link copied to clipboard!');
+    }
+  </script>
+{% endblock extrajs %}

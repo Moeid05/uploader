@@ -1,11 +1,18 @@
+{%load static%}
 <!DOCTYPE html>
 <html>
 <head>
     {% include 'uploader/includes/header.html' %}
     {% block extrahead %}{% endblock extrahead %}
     {% block extrastyle %}{% endblock extrastyle %}
+    {% if request.path == '/accounts/myfiles/'%}
+    <link rel="stylesheet" href="{%static 'users/css/user-panel.css'%}">
+    {%endif%}
 </head>
 <body>
+    {% if request.path == '/accounts/myfiles/'%}
+    {%include "users/includes/user-panel.html"%}
+    {%endif%}
     {% block content %}
     {% endblock content %}
     {% block extrajs %}{% endblock extrajs %}

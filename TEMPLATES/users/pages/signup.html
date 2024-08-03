@@ -1,68 +1,8 @@
 {% extends 'users\layouts\base.html' %}
+{%load static%}
+
 {% block extrastyle %}
-<style>
-body {
-  background-color: #f2f2f2;
-  font-family: Arial, sans-serif;
-}
-
-h1 {
-  color: #00698f;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-form {
-  width: 50%;
-  margin: 40px auto;
-  padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #dddddd;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-label {
-  display: block;
-  margin-bottom: 10px;
-}
-
-input[type="text"], input[type="email"], input[type="password"] {
-  width: 90%;
-  height: 10px;
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-}
-
-button[type="submit"] {
-  background-color: #00698f;
-  color: #ffffff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button[type="submit"]:hover {
-  background-color: #003d5d;
-}
-
-.already-account {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.already-account a {
-  color: #00698f;
-  text-decoration: none;
-}
-
-.already-account a:hover {
-  text-decoration: underline;
-}
-</style>
+<link rel="stylesheet" href="{%static 'users/css/signup.css'%}">
 {% endblock extrastyle %}
 {% block content %}
 <h1>Sign Up</h1>

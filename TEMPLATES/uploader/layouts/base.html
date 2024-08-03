@@ -1,13 +1,26 @@
+{%load static%}
+
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="{%static 'uploader/css/user-panel.css'%}">
     {% include 'uploader/includes/header.html' %}
     {% block extrahead %}{% endblock extrahead %}
     {% block extrastyle %}{% endblock extrastyle %}
 </head>
 <body>
+    {%include "uploader/includes/user-panel.html"%}
+
     {% block content %}
     {% endblock content %}
+    <script>
+        const collapseBtn = document.querySelector('.collapse-btn');
+        const leftPanel = document.querySelector('.left-panel');
+
+        collapseBtn.addEventListener('click', () => {
+        leftPanel.classList.toggle('expanded');
+        });
+    </script>
     {% block extrajs %}{% endblock extrajs %}
 </body>
 </html>

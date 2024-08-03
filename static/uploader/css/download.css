@@ -1,0 +1,47 @@
+#download-box {
+    width: 50%;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  #download-box h2 {
+    margin-top: 0;
+    font-weight: bold;
+    color: #333;
+  }
+
+  #download-box p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #666;
+  }
+
+  .link-container {
+    color: #337ab7;
+  }
+
+  .link-container:hover {
+    color: #23527c;
+    cursor: pointer;
+  }
+
+  #download-box a {
+    text-decoration: none;
+    color: black;
+  }
+  .link-container .copy-link{
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .link-container .link-text {
+      display: none;
+    }
+    .link-container .copy-link {
+      display: block !important;
+    }
+  }

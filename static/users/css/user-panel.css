@@ -1,0 +1,98 @@
+.left-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0; 
+    height: 100vh;
+    background-color: #f7f7f7;
+    padding: 0;
+    border-right: 1px solid #ccc;
+    transition: width 0.5s, opacity 0.5s, padding 0.5s;
+    overflow: hidden; 
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1); 
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .left-panel.expanded {
+    width: 300px; 
+    padding: 20px; 
+    opacity: 1; 
+  }
+  
+  .left-panel .user-info,
+  .left-panel .nav-links {
+    opacity: 0;
+    transition: opacity 0.5s; 
+    margin-bottom: 20px; 
+  }
+  
+  .left-panel.expanded .user-info,
+  .left-panel.expanded .nav-links {
+    opacity: 1;
+    transition-delay: 0.5s; 
+  }
+  
+  .left-panel:not(.expanded) .user-info,
+  .left-panel:not(.expanded) .nav-links {
+    transition-delay: 0s; /* reset delay when panel is closing */
+  }
+  
+  .left-panel:not(.expanded) {
+    transition-delay: 0.5s; /* add delay to hide content when panel is closing */
+  }
+  
+  .collapse-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 0; 
+    background-color: #337ab7;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px; 
+    transition: background-color 0.2s; 
+  }
+  
+  .collapse-btn:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -20px;
+    width: 20px;
+    height: 100%;
+    background-color: #f7f7f7;
+  }
+  
+  .collapse-btn:hover {
+    background-color: #23527c;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* add box shadow on hover */
+  }
+  
+  .info-block {
+    margin-bottom: 10px;
+  }
+  
+  .info-block span {
+    font-weight: bold;
+  }
+  
+  .nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav-links li {
+    margin-bottom: 10px;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #337ab7;
+  }
+  
+  .nav-links a:hover {
+    color: #23527c;
+  }

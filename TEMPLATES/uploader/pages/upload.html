@@ -1,171 +1,18 @@
 {%extends 'uploader/layouts/base.html' %}
+{%load static%}
 {%block extrastyle %}
-<style>
-#file-upload-form {
-  max-width: 400px;
-  margin: 40px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#file-input,
-#file-name,
-#expiration-date {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-#upload-button {
-  background-color: #4CAF50;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-bottom: 20px;
-}
-
-#upload-status {
-  margin-top: 20px;
-  font-size: 18px;
-  color: #666;
-  font-weight: bold;
-}
-
-#upload-status.uploading {
-  color: #337ab7;
-}
-
-#upload-status.success {
-  color: #2ecc71;
-}
-
-#upload-status.error {
-  color: #e74c3c;
-}
-
-.auth-btns {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.auth-btn,
-#profile-btn {
-  background-color: #4CAF50;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 0 10px;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.auth-btn:hover,
-#profile-btn:hover {
-  background-color: #3e8e41;
-}
-
-#profile-btn i {
-  margin-right: 10px;
-}
-</style>
+<link rel="stylesheet" href="{% static 'uploader/css/upload.css' %}">
 {%endblock extrastyle %}
 {%block content%}
-	<div class="auth-btns">
-		<button class="auth-btn" id="login-btn">Login</button>
-		<button class="auth-btn" id="profile-btn">
-			<i class="fas fa-user-circle"></i> My Files ({{ request.user.username }})
-		  </button>
-	</div>
+<div id="main-content">
 	<form id="file-upload-form" method="post" enctype="multipart/form-data">
 		{% csrf_token %}
 		{{ form.as_p }}
 		<button id="upload-button">Upload File</button>
 		<div id="upload-status"></div>
 	</form>
-
+</div>
 {%endblock content%}
 {%block extrajs%}
-<script>
-	document.addEventListener('DOMContentLoaded', function() {
-		const fileInput = document.getElementById('file-input');
-		const uploadButton = document.getElementById('upload-button');
-		const uploadStatus = document.getElementById('upload-status');
-		const form = document.getElementById('file-upload-form');
-		const loginBtn = document.getElementById('login-btn');
-		const profileBtn = document.getElementById('profile-btn');
-		
-		uploadButton.addEventListener('click', (e) => {
-			e.preventDefault();
-
-			if (form.checkValidity()) {
-				const fileName = document.querySelector('#file-upload-form #file-name').value;
-				const file = fileInput.files[0];
-				const expirationDate = document.querySelector('#file-upload-form #expiration-date').value;
-
-				const formData = new FormData();
-				formData.append('file_name',fileName)
-				formData.append('file', file);
-				formData.append('expiration_date', expirationDate);
-
-				const csrfToken = getCookie('csrftoken');
-				console.log(formData)
-				fetch('/', {
-					method: 'POST',
-					redirect: 'follow',
-					headers: {
-						'X-CSRFToken': csrfToken
-					},
-					body: formData
-				})
-				.then((response) => {
-					if (response.ok) {
-						uploadStatus.innerHTML = 'File uploaded successfully!';
-						window.location.replace(response.url)
-					} else {
-						uploadStatus.innerHTML = 'Error uploading file.';
-					}
-				})
-				.catch((error) => {
-					uploadStatus.innerHTML = 'Error uploading file.';
-					console.log(error)
-				});
-			} else {
-				uploadStatus.innerHTML = 'Please fill in the required fields.';
-			}
-		});
-
-		loginBtn.addEventListener('click', () => {
-			window.location.href = '/accounts/login';
-		});
-
-		profileBtn.addEventListener('click', () => {
-			window.location.href = '/accounts/myfiles';})
-		// Function to get a cookie by
-		function getCookie(name) {
-			let cookieValue = null;
-			if (document.cookie && document.cookie !== '') {
-				const cookies = document.cookie.split(';');
-				for (let i = 0; i < cookies.length; i++) {
-					const cookie = cookies[i].trim();
-					if (cookie.substring(0, name.length + 1) === (name + '=')) {
-						cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-						break;
-					}
-				}
-			}
-			return cookieValue;
-		}
-	});
-</script>
+<script src="{%static 'uploader/js/upload.js'%}"></script>
 {%endblock extrajs%}

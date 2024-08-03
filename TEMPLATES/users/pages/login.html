@@ -1,51 +1,7 @@
 {% extends 'users\layouts\base.html' %}
+{%load static%}
 {% block extrastyle %}
-<style>
-body {
-  background-color: #f2f2f2;
-}
-
-h1 {
-  color: #00698f;
-}
-
-form {
-  width: 50%;
-  margin: 40px auto;
-  padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #dddddd;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-button[type="submit"] {
-  background-color: #00698f;
-  color: #ffffff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button[type="submit"]:hover {
-  background-color: #003d5d;
-}
-
-.no-account {
-  margin-top: 10px;
-  text-align: center;
-}
-
-.no-account a {
-  color: #00698f;
-  text-decoration: none;
-}
-
-.no-account a:hover {
-  text-decoration: underline;
-}
-</style>
+<link rel="stylesheet" href="{%static 'users/css/login.css'%}">
 {% endblock extrastyle %}
 {% block content %}
 <h1>Login</h1>
