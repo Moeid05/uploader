@@ -15,7 +15,7 @@
 ### Installation
 
 1. Clone the repository: `git clone https://github.com/Moeid05/uploader.git`
-2. Run the build script : `./build.sh`
+2. Run the build script : `build.sh`
 3. Apply migrations: `python manage.py makemigrations` then `python manage.py migrate`
 4. Start Docker container : `docker-compose up`
 5. run gulp : `gulp`
