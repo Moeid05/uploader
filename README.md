@@ -26,7 +26,7 @@
 
 ### Managing Files
 
-1. Navigate to the file list page: `http://127.0.0.1:8000/admin/uploader/file/`
+1. Navigate to the file list page: `http://localhost:8000/admin/uploader/file/`
 2. View, download, or delete files as needed.
 
 ## Contributing
