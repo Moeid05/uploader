@@ -1,7 +1,7 @@
 # Uploader
 =======================
 
-'Uploader' is a Django-based web application designed to facilitate file uploads and management. The project aims practice ._. im newbie and you gonna see a lot of stupid methods . hmmm
+'Uploader' is a Django-based web application designed to upload files and storage them. The project aims practice ._. im newbie and you gonna see a lot of stupid methods . hmmm
 
 ## Getting Started
 -------------------
@@ -16,9 +16,8 @@
 
 1. Clone the repository: `git clone https://github.com/Moeid05/uploader.git`
 2. Run the build script : `build.sh`
-3. Apply migrations: `python manage.py makemigrations` then `python manage.py migrate`
 4. Start Docker container : `docker-compose up`
-5. run gulp : `gulp`
+5. run gulp : `gulpfile`
 4. Run the development server: `python manage.py runserver`
 
 ### Uploading Files
