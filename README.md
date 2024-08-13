@@ -16,9 +16,7 @@
 
 1. Clone the repository: `git clone https://github.com/Moeid05/uploader.git`
 2. Run the build script : `build.sh`
-4. Start Docker container : `docker-compose up`
-5. run gulp : `gulp`
-4. Run the development server: `python manage.py runserver`
+3. Run the development server: `python manage.py runserver`
 
 ### Uploading Files
 
