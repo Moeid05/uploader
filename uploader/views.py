@@ -4,6 +4,8 @@ from .forms import UploadFileForm
 from .models import File
 import uuid
 from django.contrib.auth import get_user_model
+from django.http import Http404
+
 
 User = get_user_model()  # Get the active user model
 
@@ -27,9 +29,14 @@ def uploader_page(request):
     return render(request, 'uploader/pages/upload.html', {'form': form})
 
 def downloader_page(request, link):
-    return render(request, 'uploader/pages/download.html', {
-        'link' : link,
-    })
+    files = File.objects.all()
+    links = [file.link for file in files]
+    if link in links :
+        return render(request, 'uploader/pages/download.html', {
+            'link' : link,
+        })
+    else : 
+        raise Http404('Page not found')
 
 def download(request, link):
     file_obj = File.objects.get(link=link)
