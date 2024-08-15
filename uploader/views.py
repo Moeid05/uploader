@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import FileResponse
 from .forms import UploadFileForm
 from .models import File
-import uuid
+import secrets
 from django.contrib.auth import get_user_model
 from django.http import Http404
 
@@ -10,7 +10,7 @@ from django.http import Http404
 User = get_user_model()  # Get the active user model
 
 def generate_link(file_name):
-    return f"{file_name}-{uuid.uuid4()}"
+    return secrets.token_urlsafe(16)
 
 def uploader_page(request):
     if request.method == 'POST':
