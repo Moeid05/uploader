@@ -1,5 +1,4 @@
 # Uploader
-=======================
 
 'Uploader' is a Django-based web application designed to upload files and storage them. The project aims practice ._. im newbie and you gonna see a lot of stupid methods . hmmm
 
